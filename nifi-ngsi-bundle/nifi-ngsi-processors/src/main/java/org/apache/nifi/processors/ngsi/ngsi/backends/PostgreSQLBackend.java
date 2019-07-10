@@ -61,9 +61,12 @@ public class PostgreSQLBackend {
                     valuesForInsert += ")";
                 } else if("column".equalsIgnoreCase(attrPersistence)){
                 for (Attributes attribute : entity.getEntityAttrs()) {
-                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
-                    if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                        valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                    //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
+                    valuesForInsert += ",'" + attribute.getAttrValue() + "'";
+                    //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
+                    if ( attribute.getMetadataString() != null) {
+                        //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                        valuesForInsert += ",'" + attribute.getMetadataString() + "'";
                     } else {
                         valuesForInsert += ",'[]'";
                     }
