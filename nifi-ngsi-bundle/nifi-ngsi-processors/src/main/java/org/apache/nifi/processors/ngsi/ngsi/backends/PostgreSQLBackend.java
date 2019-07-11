@@ -59,22 +59,29 @@ public class PostgreSQLBackend {
                         valuesForInsert += ",'[]'";
                     }
                     valuesForInsert += ")";
-                } else if("column".equalsIgnoreCase(attrPersistence)){
-                for (Attributes attribute : entity.getEntityAttrs()) {
-                    //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
-                    valuesForInsert += ",'" + attribute.getAttrValue() + "'";
-                    //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                    if ( attribute.getMetadataString() != null) {
-                        //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
-                        valuesForInsert += ",'" + attribute.getMetadataString() + "'";
-                    } else {
-                        valuesForInsert += ",'[]'";
-                    }
                 }
-                valuesForInsert += ")";
-            } 
-        } // for
-        return valuesForInsert;
+            }//for
+                else if("column".equalsIgnoreCase(attrPersistence)){
+                    // iterate on all this context element attributes, if there are attributes
+                    ArrayList<Attributes> attributes = entity.getEntityAttrs();
+                //for (Attributes attribute : entity.getEntityAttrs()) {
+                    for (Attributes attribute : attributes) {
+                        String attrValue = attribute.getAttrValue();
+                        String attrMetadata = attribute.getMetadataString();
+                        //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
+                        valuesForInsert += ",'" + attrValue + "'";
+                        //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
+                        if ( attribute.getMetadataString() != null) {
+                            //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                            valuesForInsert += ",'" + attrMetadata + "'";
+                        } else {
+                            valuesForInsert += ",'[]'";
+                        }
+                    }
+                    valuesForInsert += ")";
+                } 
+            //} // for
+       return valuesForInsert;
     } // getValuesForInsert
 
 
