@@ -50,49 +50,42 @@ public class PostgreSQLBackend {
                 valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
                 valuesForInsert += ",'" + entity.getEntityId() + "'";
                 valuesForInsert += ",'" + entity.getEntityType() + "'";
-                //if ("row".equalsIgnoreCase(attrPersistence)){
-                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrName() + "'";
-                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrType()  + "'";
-                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
-                    if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                        valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
-                    } else {
-                        valuesForInsert += ",'[]'";
-                    }
-                    valuesForInsert += ")";
+                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrName() + "'";
+                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrType()  + "'";
+                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
+                if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
+                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                } else {
+                    valuesForInsert += ",'[]'";
                 }
+                valuesForInsert += ")";
             } //for
-                else if("column".equalsIgnoreCase(attrPersistence)){
-                    valuesForInsert += "(";
-                    valuesForInsert += "'" + creationTime + "'";
-                    valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
-                    valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
-                    valuesForInsert += ",'" + entity.getEntityId() + "'";
-                    valuesForInsert += ",'" + entity.getEntityType() + "'";
-                    System.out.println("Processing context element (id=" + entity.getEntityId() + ", type="
-                    + entity.getEntityType() + ")");
-                    // iterate on all this context element attributes, if there are attributes
-                    ArrayList<Attributes> attributes = entity.getEntityAttrs();
-                //for (Attributes attribute : entity.getEntityAttrs()) {
-                    for (Attributes attribute : attributes) {
-                        String attrValue = attribute.getAttrValue();
-                        String attrMetadata = attribute.getMetadataString();
-                        //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
-                        valuesForInsert += ",'" + attrValue + "'";
-                        //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                        if ( attribute.getMetadataString() != null) {
-                            //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
-                            valuesForInsert += ",'" + attrMetadata + "'";
-                        } else {
-                            valuesForInsert += ",'[]'";
-                        }
-                    }
-                    valuesForInsert += ")";
-                } 
-                //System.out.println("valuesForInsert in for loop for i= " + i + " is: " + valuesForInsert);
-            //} // for
-        System.out.println("valuesForInsert after for loop: " +  valuesForInsert);
-       return valuesForInsert;
+        } //if
+        else if("column".equalsIgnoreCase(attrPersistence)){
+            valuesForInsert += "(";
+            valuesForInsert += "'" + creationTime + "'";
+            valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
+            valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
+            valuesForInsert += ",'" + entity.getEntityId() + "'";
+            valuesForInsert += ",'" + entity.getEntityType() + "'";
+            ArrayList<Attributes> attributes = entity.getEntityAttrs();
+            for (Attributes attribute : entity.getEntityAttrs()) {
+            //        for (Attributes attribute : attributes) {
+                String attrValue = attribute.getAttrValue();
+                String attrMetadata = attribute.getMetadataString();
+                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
+                //valuesForInsert += ",'" + attrValue + "'";
+                if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
+                //        if ( attribute.getMetadataString() != null) {
+                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                    //valuesForInsert += ",'" + attrMetadata + "'";
+                } else {
+                    valuesForInsert += ",'[]'";
+                }
+            }
+            valuesForInsert += ")";
+        } 
+        return valuesForInsert;
     } // getValuesForInsert
 
 
