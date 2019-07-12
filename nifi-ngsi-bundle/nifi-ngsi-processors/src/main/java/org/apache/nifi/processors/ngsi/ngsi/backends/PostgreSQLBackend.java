@@ -36,6 +36,7 @@ public class PostgreSQLBackend {
 
     public String getValuesForInsert(String attrPersistence, Entity entity, long creationTime, String fiwareServicePath) {
         String valuesForInsert = "";
+        if ("row".equalsIgnoreCase(attrPersistence)){
             for (int i = 0; i < entity.getEntityAttrs().size(); i++) {
                 if (i == 0) {
                     valuesForInsert += "(";
@@ -49,7 +50,7 @@ public class PostgreSQLBackend {
                 valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
                 valuesForInsert += ",'" + entity.getEntityId() + "'";
                 valuesForInsert += ",'" + entity.getEntityType() + "'";
-                if ("row".equalsIgnoreCase(attrPersistence)){
+                //if ("row".equalsIgnoreCase(attrPersistence)){
                     valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrName() + "'";
                     valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrType()  + "'";
                     valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
@@ -60,9 +61,13 @@ public class PostgreSQLBackend {
                     }
                     valuesForInsert += ")";
                 }
-            //} //for
-                if("column".equalsIgnoreCase(attrPersistence)){
-                    
+            } //for
+                else if("column".equalsIgnoreCase(attrPersistence)){
+                    valuesForInsert += "'" + creationTime + "'";
+                    valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
+                    valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
+                    valuesForInsert += ",'" + entity.getEntityId() + "'";
+                    valuesForInsert += ",'" + entity.getEntityType() + "'";
                     System.out.println("Processing context element (id=" + entity.getEntityId() + ", type="
                     + entity.getEntityType() + ")");
                     // iterate on all this context element attributes, if there are attributes
