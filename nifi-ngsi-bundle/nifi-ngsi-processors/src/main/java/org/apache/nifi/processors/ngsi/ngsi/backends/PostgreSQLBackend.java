@@ -60,7 +60,21 @@ public class PostgreSQLBackend {
                     }
                     valuesForInsert += ")";
                 }
-                else if("column".equalsIgnoreCase(attrPersistence)){
+            } //for
+                if("column".equalsIgnoreCase(attrPersistence)){
+                    
+                    if (valuesForInsert == null || valuesForInsert.isEmpty()) {
+                        valuesForInsert += "(";
+
+                    } else {
+                        valuesForInsert += ",(";
+                    } // if else
+                    valuesForInsert += "'" + creationTime + "'";
+                    valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
+                    valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
+                    valuesForInsert += ",'" + entity.getEntityId() + "'";
+                    valuesForInsert += ",'" + entity.getEntityType() + "'";
+                    
                     System.out.println("Processing context element (id=" + entity.getEntityId() + ", type="
                     + entity.getEntityType() + ")");
                     // iterate on all this context element attributes, if there are attributes
@@ -82,7 +96,7 @@ public class PostgreSQLBackend {
                     valuesForInsert += ")";
                 } 
                 System.out.println("valuesForInsert in for loop for i= " + i + " is: " + valuesForInsert);
-            } // for
+            //} // for
         System.out.println("valuesForInsert after for loop: " +  valuesForInsert);
        return valuesForInsert;
     } // getValuesForInsert
