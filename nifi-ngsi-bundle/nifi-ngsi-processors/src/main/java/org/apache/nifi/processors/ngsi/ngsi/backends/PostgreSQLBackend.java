@@ -95,7 +95,7 @@ public class PostgreSQLBackend {
                     }
                     valuesForInsert += ")";
                 } 
-                System.out.println("valuesForInsert in for loop for i= " + i + " is: " + valuesForInsert);
+                //System.out.println("valuesForInsert in for loop for i= " + i + " is: " + valuesForInsert);
             //} // for
         System.out.println("valuesForInsert after for loop: " +  valuesForInsert);
        return valuesForInsert;
