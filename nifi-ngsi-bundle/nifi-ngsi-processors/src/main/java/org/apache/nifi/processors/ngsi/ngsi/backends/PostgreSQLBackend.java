@@ -60,7 +60,7 @@ public class PostgreSQLBackend {
                     }
                     valuesForInsert += ")";
                 }
-            } //for
+            //} //for
                 if("column".equalsIgnoreCase(attrPersistence)){
                     
                     System.out.println("Processing context element (id=" + entity.getEntityId() + ", type="
@@ -84,7 +84,7 @@ public class PostgreSQLBackend {
                     valuesForInsert += ")";
                 } 
                 //System.out.println("valuesForInsert in for loop for i= " + i + " is: " + valuesForInsert);
-            //} // for
+            } // for
         System.out.println("valuesForInsert after for loop: " +  valuesForInsert);
        return valuesForInsert;
     } // getValuesForInsert
