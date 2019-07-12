@@ -63,18 +63,6 @@ public class PostgreSQLBackend {
             } //for
                 if("column".equalsIgnoreCase(attrPersistence)){
                     
-                    if (valuesForInsert == null || valuesForInsert.isEmpty()) {
-                        valuesForInsert += "(";
-
-                    } else {
-                        valuesForInsert += ",(";
-                    } // if else
-                    valuesForInsert += "'" + creationTime + "'";
-                    valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
-                    valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
-                    valuesForInsert += ",'" + entity.getEntityId() + "'";
-                    valuesForInsert += ",'" + entity.getEntityType() + "'";
-                    
                     System.out.println("Processing context element (id=" + entity.getEntityId() + ", type="
                     + entity.getEntityType() + ")");
                     // iterate on all this context element attributes, if there are attributes
