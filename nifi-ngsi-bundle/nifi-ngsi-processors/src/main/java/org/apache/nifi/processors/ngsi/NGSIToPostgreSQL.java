@@ -64,7 +64,7 @@ public class NGSIToPostgreSQL extends AbstractSessionFactoryProcessor {
             .displayName("Attribute Persistence")
             .description("The mode of storing the data inside of the table")
             .required(false)
-            .allowableValues("row")
+            .allowableValues("row", "column")
             .defaultValue("row")
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
