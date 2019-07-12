@@ -63,6 +63,7 @@ public class PostgreSQLBackend {
                 }
             } //for
                 else if("column".equalsIgnoreCase(attrPersistence)){
+                    valuesForInsert += "(";
                     valuesForInsert += "'" + creationTime + "'";
                     valuesForInsert += ",'" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(creationTime) + "'";
                     valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
