@@ -68,17 +68,17 @@ public class PostgreSQLBackend {
             valuesForInsert += ",'" + fiwareServicePath.replace("/", "") + "'";
             valuesForInsert += ",'" + entity.getEntityId() + "'";
             valuesForInsert += ",'" + entity.getEntityType() + "'";
-            ArrayList<Attributes> attributes = entity.getEntityAttrs();
+            //ArrayList<Attributes> attributes = entity.getEntityAttrs();
             for (Attributes attribute : entity.getEntityAttrs()) {
             //        for (Attributes attribute : attributes) {
-                String attrValue = attribute.getAttrValue();
-                String attrMetadata = attribute.getMetadataString();
-                valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
-                //valuesForInsert += ",'" + attrValue + "'";
-                if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                //        if ( attribute.getMetadataString() != null) {
-                    valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
-                    //valuesForInsert += ",'" + attrMetadata + "'";
+                //String attrValue = attribute.getAttrValue();
+                //String attrMetadata = attribute.getMetadataString();
+                //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
+                valuesForInsert += ",'" + attribute.getAttrValue() + "'";
+                //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
+                if ( attribute.getMetadataString() != null) {
+                    //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
+                    valuesForInsert += ",'" + attribute.getMetadataString() + "'";
                 } else {
                     valuesForInsert += ",'[]'";
                 }
