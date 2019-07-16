@@ -76,7 +76,7 @@ public class PostgreSQLBackend {
                 //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getAttrValue() + "'";
                 valuesForInsert += ",'" + attribute.getAttrValue() + "'";
                 //if (entity.getEntityAttrs().get(i).getAttrMetadata() != null) {
-                if ( attribute.getMetadataString() != null) {
+                if ( attribute.getMetadataString() != null || !attribute.getMetadataString.isEmpty()) {
                     //valuesForInsert += ",'" + entity.getEntityAttrs().get(i).getMetadataString() + "'";
                     valuesForInsert += ",'" + attribute.getMetadataString() + "'";
                 } else {
