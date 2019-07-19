@@ -499,6 +499,27 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
                     + "-  OK  - A table name length greater than 63 characters has been detected");
         } // try catch
     } // testBuildTableNameLengthDataModelByEntity
+    
+    @Test
+    public void testColumnFields() throws Exception {
+        System.out.println("[NGSIToPostgreSQL.listOfFields]"
+                + "-------- When data model is by entity, a table name length greater than 63 characters is detected");
+
+        runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
+        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
+        String servicePath = "/tooLooooooooooooooooooooongServicePath";
+        Entity entity = new Entity("tooLooooooooooooooooooooooooooongEntity", "someType",null);
+
+
+        try {
+            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase);
+            fail("[NGSIToPostgreSQL.buildTableName]"
+                    + "- FAIL - A table name length greater than 63 characters has not been detected");
+        } catch (Exception e) {
+            System.out.println("[NGSIToPostgreSQL.buildTableName]"
+                    + "-  OK  - A table name length greater than 63 characters has been detected");
+        } // try catch
+    } // testColumnFields
 
 
 
