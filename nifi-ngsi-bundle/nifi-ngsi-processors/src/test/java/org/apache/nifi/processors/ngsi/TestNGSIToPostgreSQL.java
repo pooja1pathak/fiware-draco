@@ -502,23 +502,34 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
     
     @Test
     public void testColumnFields() throws Exception {
-        System.out.println("[NGSIToPostgreSQL.listOfFields]"
-                + "-------- When data model is by entity, a table name length greater than 63 characters is detected");
+        System.out.println("[PostgreSQLBackend.listOfFields ]"
+                + "-------- When attrPersistence is column");
 
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
-        String dataModel = runner.getProcessContext().getProperty(NGSIToMySQL.DATA_MODEL).getValue();
-        String servicePath = "/tooLooooooooooooooooooooongServicePath";
-        Entity entity = new Entity("tooLooooooooooooooooooooooooooongEntity", "someType",null);
-
-
+        String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
+        
+        ArrayList<Attributes> entityAttrs = ["temperature", "pressure"];
+        Entity entity = new Entity("someId", "someType", entityAttrs);
+        
         try {
-            backend.buildTableName(servicePath,entity,dataModel,enableEncoding,enableLowercase);
-            fail("[NGSIToPostgreSQL.buildTableName]"
-                    + "- FAIL - A table name length greater than 63 characters has not been detected");
+            ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
+            ArrayList<String> expecetedListOfFields = [recvTimeTs, recvTime, fiwareServicePath, entityId, entityType, temperature, temperature_md, pressure, pressure_md];
+
+            try {
+                assertEquals(expecetedTableName, listOfFields);
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "-  OK  - '" + listOfFields + "' is equals to the expected output");
+            } catch (AssertionError e) {
+                System.out.println("[PostgreSQLBackend.listOfFields]"
+                        + "- FAIL - '" + builtTableName + "' is not equals to the expected output");
+                throw e;
+            } // try catch
         } catch (Exception e) {
-            System.out.println("[NGSIToPostgreSQL.buildTableName]"
-                    + "-  OK  - A table name length greater than 63 characters has been detected");
+            System.out.println("[PostgreSQLBackend.listOfFields]"
+                    + "- FAIL - There was some problem when building the list of fields");
+            throw e;
         } // try catch
+
     } // testColumnFields
 
 
