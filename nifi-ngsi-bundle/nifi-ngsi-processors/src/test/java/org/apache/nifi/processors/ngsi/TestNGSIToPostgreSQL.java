@@ -511,7 +511,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
         
-        ArrayList<Attributes> entityAttrs = new ArrayList<Attributes>();
+        ArrayList<String> entityAttrs = new ArrayList<Attributes>();
         entityAttrs.add("temperature", "int", "20", [], "");
         entityAttrs.add("pressure", "int", "30", [], "");
         Entity entity = new Entity("someId", "someType", entityAttrs);
