@@ -4,7 +4,7 @@ import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
-import org.apache.nifi.processors.ngsi.ngsi.utils;
+import org.apache.nifi.processors.ngsi.ngsi.utils.*;
 import java.util.ArrayList;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
@@ -511,15 +511,21 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         runner.setProperty(NGSIToMySQL.ATTR_PERSISTENCE, "column");
         String attrPersistence = runner.getProcessContext().getProperty(NGSIToMySQL.ATTR_PERSISTENCE).getValue();
         
+        List<String> arrList = Arrays.asList("temperature", "int", "20", "[]", "");
+        
         ArrayList<String> entityAttrs = new ArrayList<String>();
-        entityAttrs.add("temperature", "int", "20", "[]", "");
-        entityAttrs.add("pressure", "int", "30", "[]", "");
+        entityAttrs.addAll(arrList); 
+        //entityAttrs.add("temperature", "int", "20", "[]", "");
+        //entityAttrs.add("pressure", "int", "30", "[]", "");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
         try {
             ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
+            List<String> expList = Arrays.asList("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md");
             ArrayList<String> expecetedListOfFields = new ArrayList<String>();
-            expecetedListOfFields.add("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md", "pressure", "pressure_md");
+            expecetedListOfFields.addAll(expList);
+            //expecetedListOfFields.add("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md", "pressure", "pressure_md");
+            //expecetedListOfFields.add("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md");
 
             try {
                 assertEquals(expecetedTableName, listOfFields);
