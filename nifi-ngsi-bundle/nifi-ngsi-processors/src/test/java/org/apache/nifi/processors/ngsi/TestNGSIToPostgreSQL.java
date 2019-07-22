@@ -518,7 +518,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         //entityAttrs.addAll(arrList); 
         //entityAttrs.add({"temperature", "int", "20", [], ""});
         //entityAttrs.add("pressure", "int", "30", "[]", "");
-        Entity entity = new Entity("someId", "someType", "someName");
+        Entity entity = new Entity("someId", "someType", ["temperature", "int", "20", [], ""]);
         
         try {
             ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
