@@ -516,7 +516,7 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         //ArrayList<String> entityAttrs = new ArrayList<String>();
         ArrayList<Attributes> entityAttrs = new ArrayList<Attributes>();
         //entityAttrs.addAll(arrList); 
-        entityAttrs.add("temperature", "int", "20", "[]", "");
+        entityAttrs.add("temperature", "int", "20", [], "");
         //entityAttrs.add("pressure", "int", "30", "[]", "");
         Entity entity = new Entity("someId", "someType", entityAttrs);
         
