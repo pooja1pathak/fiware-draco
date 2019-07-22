@@ -4,6 +4,7 @@ import org.apache.nifi.processor.util.pattern.RollbackOnFailure;
 import org.apache.nifi.processors.ngsi.ngsi.backends.PostgreSQLBackend;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Entity;
 import org.apache.nifi.processors.ngsi.ngsi.utils.Attributes;
+package org.apache.nifi.processors.ngsi.ngsi.utils;
 import java.util.ArrayList;
 import org.apache.nifi.util.TestRunner;
 import org.apache.nifi.util.TestRunners;
