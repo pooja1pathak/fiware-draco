@@ -518,7 +518,8 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         
         try {
             ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
-            ArrayList<String> expecetedListOfFields = ["recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md", "pressure", "pressure_md"];
+            ArrayList<String> expecetedListOfFields = new ArrayList<String>();
+            expecetedListOfFields.add("recvTimeTs", "recvTime", "fiwareServicePath", "entityId", "entityType", "temperature", "temperature_md", "pressure", "pressure_md");
 
             try {
                 assertEquals(expecetedTableName, listOfFields);
