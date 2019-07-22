@@ -514,11 +514,11 @@ runner.setProperty(NGSIToMySQL.ENABLE_ENCODING, "true");
         //List<Attributes> arrList = Arrays.asList("temperature", "int", "20", "[]", "");
         
         //ArrayList<String> entityAttrs = new ArrayList<String>();
-        ArrayList<Attributes> entityAttrs = new ArrayList<Attributes>();
+        //ArrayList<Attributes> entityAttrs = new ArrayList<Attributes>();
         //entityAttrs.addAll(arrList); 
-        entityAttrs.add({"temperature", "int", "20", [], ""});
+        //entityAttrs.add({"temperature", "int", "20", [], ""});
         //entityAttrs.add("pressure", "int", "30", "[]", "");
-        Entity entity = new Entity("someId", "someType", entityAttrs);
+        Entity entity = new Entity("someId", "someType", "someName");
         
         try {
             ArrayList<String> listOfFields = backend.listOfFields(attrPersistence, entity);
